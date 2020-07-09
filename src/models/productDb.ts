@@ -23,6 +23,9 @@ export class ProductDb extends Model<ProductDb> {
   @Column({ type: DataTypes.INTEGER })
   public stock: number;
 
+  @Column({ type: DataTypes.INTEGER })
+  public deletedAt: Date;
+
   @ForeignKey(() => PhotoDb)
   @Column({type: DataTypes.INTEGER, field: "photo_id"})
   public photoId;

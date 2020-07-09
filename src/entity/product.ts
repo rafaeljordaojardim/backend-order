@@ -2,7 +2,9 @@ import Photo from "./photo";
 
 export default class Product {
 
-  constructor() {}
+  constructor() {
+    this.deletedAt = false;
+  }
   public id: number;
   public name: string;
   public photoId?: number;
@@ -10,4 +12,5 @@ export default class Product {
   public kg: number;
   public stock: number;
   public photoUrl: string;
+  public deletedAt?: boolean;
 }

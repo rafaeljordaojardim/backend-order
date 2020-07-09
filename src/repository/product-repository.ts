@@ -8,6 +8,7 @@ export class ProductRepository {
   constructor() { }
 
   public static returnFromDatabase(row: any) {
+    console.log(JSON.stringify(row));
     const product: Product = new Product();
     if (row["id"]) {
       product.id = row["id"];
@@ -23,6 +24,9 @@ export class ProductRepository {
     }
     if (row["stock"]) {
       product.stock = row["stock"];
+    }
+    if (row["deletedAt"]) {
+      product.deletedAt = true;
     }
     if (row["photo"]) {
       product.photoUrl = PhotoRepository.returnFromDatabase(row["photo"]).url;
@@ -45,7 +49,7 @@ export class ProductRepository {
   }
 
   public async getAllProduct(): Promise<Product[]> {
-    const products = await ProductDb.findAll({ include: [PhotoDb] });
+    const products = await ProductDb.findAll({ include: [PhotoDb], paranoid: false });
     console.log(products);
     
     if (!products.length) return [];
